@@ -27,7 +27,11 @@ config :phoenix, :json_library, Jason
 
 config :app, :pow,
   user: App.Users.User,
-  repo: App.Repo
+  repo: App.Repo,
+  web_module: AppWeb,
+  extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  mailer_backend: MyAppWeb.Pow.Mailer
 
 config :phoenix, :template_engines,
   slim: PhoenixSlime.Engine,
