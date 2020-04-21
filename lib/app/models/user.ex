@@ -1,5 +1,5 @@
-defmodule App.Users.User do
-  use Ecto.Schema
+defmodule App.User do
+  use App.Model
   use Pow.Ecto.Schema
   use Pow.Extension.Ecto.Schema,
     extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation]
@@ -20,7 +20,7 @@ defmodule App.Users.User do
 
   def changeset_role(user_or_changeset, attrs) do
     user_or_changeset
-    |> Changeset.cast(attrs, [:role])
-    |> Changeset.validate_inclusion(:role, ~w(user admin))
+    |> cast(attrs, [:role])
+    |> validate_inclusion(:role, ~w(user admin))
   end
 end

@@ -26,7 +26,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :app, :pow,
-  user: App.Users.User,
+  user: App.User,
   repo: App.Repo,
   web_module: AppWeb,
   extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation],

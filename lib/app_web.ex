@@ -23,6 +23,13 @@ defmodule AppWeb do
 
       import Plug.Conn
       import AppWeb.Gettext
+      import Web.Controller.Query
+
+      def action(conn, _) do
+        args = [conn, conn.params, conn.assigns]
+        apply(__MODULE__, action_name(conn), args)
+      end
+
       alias AppWeb.Router.Helpers, as: Routes
     end
   end

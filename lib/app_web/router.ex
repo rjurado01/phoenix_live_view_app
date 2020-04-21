@@ -17,7 +17,8 @@ defmodule AppWeb.Router do
   end
 
   pipeline :admin do
-    plug MyAppWeb.EnsureRolePlug, :admin
+    plug AppWeb.EnsureRolePlug, :admin
+    # plug :put_layout, {AppWeb.LayoutView, :admin}
   end
 
   pipeline :protected do
@@ -41,6 +42,12 @@ defmodule AppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/admin", AppWeb do
+    pipe_through [:browser, :protected]
+
+    resources "/users", UserController, only: [:index]
   end
 
   # Other scopes may use custom stacks.
