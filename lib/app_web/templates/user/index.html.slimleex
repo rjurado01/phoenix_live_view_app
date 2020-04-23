@@ -1,0 +1,33 @@
+h1 Listing Users
+
+table
+  thead
+    tr
+      th
+      th Email
+      th Name
+      th Status
+      th
+  tbody
+    = for user <- @users do
+      tr
+        td
+        td
+          = user.email
+        td
+          | name
+        td
+          | status
+        td class="text-right"
+          | Wee
+
+= if @page_number > 1 do
+  a(href="#" phx-click="prev-page") < Prev
+
+= if @meta.next do
+  a(href="#" phx-click="next-page") Next >
+
+form(phx-change="change-page-size")
+  select(name="page_size")
+    = for page_size <- [5, 10, 25] do
+      option(value="#{page_size}" selected=(page_size == @page_size)) =page_size

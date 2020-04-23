@@ -44,7 +44,9 @@ defmodule App.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.14"},
-      {:phoenix_slime, "~> 0.13.1"}
+      {:phoenix_slime, "~> 0.13.1"},
+      {:phoenix_live_view, "~> 0.12.1"},
+      {:floki, ">= 0.0.0", only: :test}
     ]
   end
 
