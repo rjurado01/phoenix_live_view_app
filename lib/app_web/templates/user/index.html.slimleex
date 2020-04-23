@@ -12,14 +12,10 @@ table
     = for user <- @users do
       tr
         td
-        td
-          = user.email
-        td
-          | name
-        td
-          | status
-        td class="text-right"
-          | Wee
+        td = user.email
+        td = user.name
+        td = user |> App.User.status
+        td(class="text-right") Wee
 
 = if @page_number > 1 do
   a(href="#" phx-click="prev-page") < Prev

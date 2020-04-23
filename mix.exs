@@ -46,7 +46,8 @@ defmodule App.MixProject do
       {:pow, "~> 1.0.14"},
       {:phoenix_slime, "~> 0.13.1"},
       {:phoenix_live_view, "~> 0.12.1"},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:faker, "~> 0.13", only: [:dev, :test]}
     ]
   end
 

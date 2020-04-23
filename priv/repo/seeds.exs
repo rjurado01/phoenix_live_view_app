@@ -13,20 +13,21 @@
   email: "admin@email.com",
   password: "asdfasdf",
   password_confirmation: "asdfasdf",
+  name: "Admin",
   role: "admin"
 })
 
-user
-|> App.User.confirm_email_changeset(%{})
-|> App.User.update %{current_password: "asdfasdf"}
+PowEmailConfirmation.Ecto.Context.confirm_email(user, %{}, otp_app: :app)
 
 for x <- 1..10 do
   {:ok, user} = App.User.create(%{
     email: "user#{x}@email.com",
     password: "asdfasdf",
-    password_confirmation: "asdfasdf"})
+    password_confirmation: "asdfasdf",
+    name: Faker.Name.Es.first_name()
+  })
 
-  user
-  |> App.User.confirm_email_changeset(%{})
-  |> App.User.update %{current_password: "asdfasdf"}
+  if rem(x, 2) == 0 do
+    PowEmailConfirmation.Ecto.Context.confirm_email(user, %{}, otp_app: :app)
+  end
 end

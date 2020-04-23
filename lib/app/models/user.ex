@@ -6,6 +6,7 @@ defmodule App.User do
 
   schema "users" do
     field :role, :string, default: "user"
+    field :name, :string
 
     pow_user_fields()
 
@@ -14,6 +15,7 @@ defmodule App.User do
 
   def changeset(user_or_changeset, attrs) do
     user_or_changeset
+    |> cast(attrs, [:name])
     |> pow_changeset(attrs)
     |> pow_extension_changeset(attrs)
   end
@@ -23,4 +25,7 @@ defmodule App.User do
     |> cast(attrs, [:role])
     |> validate_inclusion(:role, ~w(user admin))
   end
+
+  def status(%{email_confirmed_at: confirmed}) when is_nil(confirmed), do: :pending
+  def status(_), do: :confirmed
 end

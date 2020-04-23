@@ -23,7 +23,6 @@ defmodule AppWeb do
 
       import Plug.Conn
       import AppWeb.Gettext
-      import AppWeb.Controller.Query
       import Phoenix.LiveView.Controller
 
       def action(conn, _) do
