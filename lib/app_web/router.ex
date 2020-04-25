@@ -2,7 +2,7 @@ defmodule AppWeb.Router do
   use AppWeb, :router
   use Pow.Phoenix.Router
   use Pow.Extension.Phoenix.Router,
-    extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation]
+    extensions: [PowResetPassword, PowEmailConfirmation, PowInvitationPow]
 
   pipeline :browser do
     plug :accepts, ["html"]

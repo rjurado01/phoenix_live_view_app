@@ -49,6 +49,7 @@ defmodule AppWeb.Endpoint do
   plug Plug.Session, @session_options
 
   plug Pow.Plug.Session, otp_app: :app
+  plug PowPersistentSession.Plug.Cookie
 
   plug AppWeb.Router
 end

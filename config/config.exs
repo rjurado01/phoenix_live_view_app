@@ -30,7 +30,7 @@ config :app, :pow,
   user: App.User,
   repo: App.Repo,
   web_module: AppWeb,
-  extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation],
+  extensions: [PowResetPassword, PowEmailConfirmation, PowInvitation, PowPersistentSession],
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
   mailer_backend: MyAppWeb.Pow.Mailer
 
