@@ -9,10 +9,10 @@ defmodule AppWeb.UserIndexLive do
   end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, Query.init_params) |> fetch}
+    {:ok, assign(socket, Query.init_params(%{order_field: "email"})) |> fetch}
   end
 
-  def fetch(socket) do
+  defp fetch(socket) do
     with {:ok, users, meta} <- Query.run(App.User, socket.assigns) do
       assign(socket, users: users, meta: meta)
     else
@@ -31,4 +31,20 @@ defmodule AppWeb.UserIndexLive do
   def handle_event("change-page-size", %{"page_size" => page_size}, socket) do
     {:noreply, assign(socket, %{page_size: String.to_integer(page_size)}) |> fetch}
   end
+
+  def handle_event("sort",
+    %{"field" => field},
+    %{assigns: %{order_dir: order_dir, order_field: order_field}} = socket)
+  when field == order_field do
+    dir = if order_dir == "desc", do: "asc", else: "desc"
+    {:noreply, assign(socket, %{order_field: field, order_dir: dir}) |> fetch}
+  end
+
+  def handle_event("sort", %{"field" => field}, socket) do
+    {:noreply, assign(socket, %{order_field: field, order_dir: "desc"}) |> fetch}
+  end
+
+  def sort_order_icon(column, sort_by, "asc") when column == sort_by, do: "▲"
+  def sort_order_icon(column, sort_by, "desc") when column == sort_by, do: "▼"
+  def sort_order_icon(_, _, _), do: ""
 end

@@ -1,13 +1,13 @@
 defmodule App.QueryService do
   require Ecto.Query
 
-  def init_params do
-    %{
+  def init_params(params \\ %{}) do
+    Map.merge(%{
       page_number: 1,
       page_size: 5,
-      order_field: :id,
-      order_dir: :desc,
-    }
+      order_field: "id",
+      order_dir: "desc",
+    }, params)
   end
 
   def run(model, params) do
@@ -23,7 +23,10 @@ defmodule App.QueryService do
   end
 
   def order(query, params) do
-    Ecto.Query.order_by(query, [{^params.order_dir, ^params.order_field}])
+    Ecto.Query.order_by(
+      query,
+      [{^String.to_atom(params.order_dir), ^String.to_atom(params.order_field)}]
+    )
   end
 
   def paginate(query, params) do
