@@ -26,6 +26,9 @@ defmodule App.User do
     |> validate_inclusion(:role, ~w(user admin))
   end
 
+  def filter_by(:email, value), do: dynamic([x], x.email == ^value)
+  def filter_by(:name, value), do: dynamic([x], x.name == ^value)
+
   def status(%{email_confirmed_at: confirmed}) when is_nil(confirmed), do: :pending
   def status(_), do: :confirmed
 end

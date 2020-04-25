@@ -7,11 +7,13 @@ defmodule App.QueryService do
       page_size: 5,
       order_field: "id",
       order_dir: "desc",
+      filter: %{}
     }, params)
   end
 
   def run(model, params) do
     query = model
+            |> App.Repo.filter(params.filter)
             |> order(params)
             |> paginate(params)
 

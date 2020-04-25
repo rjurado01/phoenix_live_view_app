@@ -2,14 +2,13 @@ defmodule AppWeb.UserIndexLive do
   use Phoenix.LiveView
 
   alias App.QueryService, as: Query
-  alias AppWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
     Phoenix.View.render(AppWeb.UserView, "index.html", assigns)
   end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, Query.init_params(%{order_field: "email"})) |> fetch}
+    {:ok, assign(socket, init_params()) |> fetch}
   end
 
   defp fetch(socket) do
@@ -18,6 +17,13 @@ defmodule AppWeb.UserIndexLive do
     else
       _ -> socket
     end
+  end
+
+  defp init_params do
+    Query.init_params(%{
+      order_field: "email",
+      filter: %{"email" => "", "name" => ""}
+    })
   end
 
   def handle_event("prev-page", _, %{assigns: %{page_number: current}} = socket) do
@@ -42,6 +48,14 @@ defmodule AppWeb.UserIndexLive do
 
   def handle_event("sort", %{"field" => field}, socket) do
     {:noreply, assign(socket, %{order_field: field, order_dir: "desc"}) |> fetch}
+  end
+
+  def handle_event("filter", params, socket) do
+    {:noreply, assign(socket, Map.merge(init_params(), %{filter: params})) |> fetch}
+  end
+
+  def handle_event("clear", _, socket) do
+    {:noreply, assign(socket, init_params()) |> fetch}
   end
 
   def sort_order_icon(column, sort_by, "asc") when column == sort_by, do: "▲"

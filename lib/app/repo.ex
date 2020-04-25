@@ -24,8 +24,12 @@ defmodule App.Repo do
   def filter(module, params) do
     Enum.reduce(params, module, fn {field, value}, acc ->
       try do
-        field_name = if is_atom(field), do: field, else: String.to_atom(field)
-        where(acc, [x], ^module.filter_by(field_name, value))
+        if value != "" do
+          field_name = if is_atom(field), do: field, else: String.to_atom(field)
+          where(acc, [x], ^module.filter_by(field_name, value))
+        else
+          acc
+        end
       rescue
         FunctionClauseError -> acc
       end
