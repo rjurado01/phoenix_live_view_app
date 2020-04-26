@@ -10,6 +10,9 @@
       <li>
         <%= live_patch "Users", to: Routes.live_path(@conn, AppWeb.UserIndexLive) %>
       </li>
+      <li>
+        <%= link "Invite", to: Routes.pow_invitation_invitation_path(@conn, :new) %>
+      </li>
     </ul>
   </article>
 
