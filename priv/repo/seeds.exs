@@ -13,9 +13,10 @@
   email: "admin@email.com",
   password: "asdfasdf",
   password_confirmation: "asdfasdf",
-  name: "Admin",
-  role: "admin"
+  name: "Admin"
 })
+
+user |> App.User.update(:changeset_role, %{role: "admin"})
 
 PowEmailConfirmation.Ecto.Context.confirm_email(user, %{}, otp_app: :app)
 

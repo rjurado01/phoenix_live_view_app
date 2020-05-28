@@ -37,16 +37,20 @@ defmodule App.Model do
         end
       end
 
-      def create(attrs \\ %{}) do
-        struct(__MODULE__)
-        |> __MODULE__.changeset(attrs)
-        |> Repo.insert
+      def create(attrs) do
+        create(:changeset, attrs)
+      end
+
+      def create(changeset_name, attrs) do
+        apply(__MODULE__, changeset_name, [attrs]) |> Repo.insert
       end
 
       def update(object, attrs) do
-        object
-        |> __MODULE__.changeset(attrs)
-        |> Repo.update
+        update(object, :changeset, attrs)
+      end
+
+      def update(object, changeset_name, attrs) do
+        apply(__MODULE__, changeset_name, [object, attrs]) |> Repo.update
       end
 
       defdelegate delete(object), to: Repo

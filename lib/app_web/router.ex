@@ -46,7 +46,7 @@ defmodule AppWeb.Router do
   end
 
   scope "/admin", AppWeb do
-    pipe_through [:browser, :protected]
+    pipe_through [:browser, :protected, :admin]
 
     live "/users", UserIndexLive
   end
