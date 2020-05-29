@@ -33,8 +33,8 @@ defmodule App.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.7"},
-      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix, "~> 1.5.3"},
+      {:phoenix_pubsub, "~> 2.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
@@ -45,7 +45,7 @@ defmodule App.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.14"},
       {:phoenix_slime, "~> 0.13.1"},
-      {:phoenix_live_view, "~> 0.12.1"},
+      {:phoenix_live_view, "~> 0.13.2"},
       {:floki, ">= 0.0.0", only: :test},
       {:faker, "~> 0.13", only: [:dev, :test]}
     ]
