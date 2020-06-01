@@ -16,10 +16,10 @@ table
       th
       th(phx-click="sort" phx-value-field="email")
         | Email
-        span = AppWeb.UserIndexLive.sort_order_icon("email", @order_field, @order_dir)
+        span = AppWeb.UserLive.Index.sort_order_icon("email", @order_field, @order_dir)
       th(phx-click="sort" phx-value-field="name")
         | Name
-        span = AppWeb.UserIndexLive.sort_order_icon("name", @order_field, @order_dir)
+        span = AppWeb.UserLive.Index.sort_order_icon("name", @order_field, @order_dir)
       th
         | Status
       th

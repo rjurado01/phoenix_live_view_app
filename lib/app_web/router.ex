@@ -45,10 +45,16 @@ defmodule AppWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/", AppWeb do
+    pipe_through [:browser, :protected]
+
+    live "/profile", UserLive.Profile
+  end
+
   scope "/admin", AppWeb do
     pipe_through [:browser, :protected, :admin]
 
-    live "/users", UserIndexLive
+    live "/users", UserLive.Index
   end
 
   # Other scopes may use custom stacks.

@@ -1,5 +1,5 @@
-defmodule AppWeb.UserIndexLive do
-  use Phoenix.LiveView
+defmodule AppWeb.UserLive.Index do
+  use AppWeb, :live_view
 
   alias App.QueryService, as: Query
 

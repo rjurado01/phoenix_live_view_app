@@ -13,7 +13,7 @@ defmodule App.User do
     timestamps()
   end
 
-  def changeset(user_or_changeset, attrs) do
+  def changeset_create(user_or_changeset, attrs) do
     user_or_changeset
     |> cast(attrs, [:name])
     |> pow_changeset(attrs)
@@ -24,6 +24,12 @@ defmodule App.User do
     user_or_changeset
     |> cast(attrs, [:role])
     |> validate_inclusion(:role, ~w(user admin))
+  end
+
+  def changeset_update(user_or_changeset, attrs) do
+    user_or_changeset
+    |> cast(attrs, [:name])
+    |> validate_required(:name)
   end
 
   def filter_by(:email, value), do: dynamic([x], x.email == ^value)

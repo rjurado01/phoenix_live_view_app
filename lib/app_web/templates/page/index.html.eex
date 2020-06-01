@@ -8,7 +8,7 @@
     <h2>Admin</h2>
     <ul>
       <li>
-        <%= live_patch "Users", to: Routes.live_path(@conn, AppWeb.UserIndexLive) %>
+        <%= live_patch "Users", to: Routes.live_path(@conn, AppWeb.UserLive.Index) %>
       </li>
       <li>
         <%= link "Invite", to: Routes.pow_invitation_invitation_path(@conn, :new) %>
@@ -17,16 +17,10 @@
   </article>
 
   <article class="column">
-    <h2>Help</h2>
+    <h2>Member</h2>
     <ul>
       <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
+        <%= live_patch "Profile", to: Routes.live_path(@conn, AppWeb.UserLive.Profile) %>
       </li>
     </ul>
   </article>
