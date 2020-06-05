@@ -20,11 +20,14 @@ defmodule AppWeb.UserLive.Profile do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
+    IO.inspect user_params
+
     case User.update(socket.assigns.changeset, :changeset_update, user_params) do
-      {:ok, _user} ->
+      {:ok, user} ->
         {:noreply,
          socket
          |> put_flash(:info, "User updated successfully.")
+         |> assign(changeset: user |> User.changeset_update(%{}))
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

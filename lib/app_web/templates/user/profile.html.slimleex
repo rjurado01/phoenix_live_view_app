@@ -5,4 +5,11 @@ h1 Profile
   = text_input f, :name
   = error_tag f, :name
 
-  = submit "Save", phx_disable_with: "Saving..."
+  = if @changeset.data.avatar_url do
+    img#user_avatar_preview(src="#{@changeset.data.avatar_url}")
+
+  = file_input f, :avatar, [phx_hook: "uploadImage", required: true, accept: "image/jpeg, image/jpg, image/png"]
+  = hidden_input f, :avatar_base64, [phx_update: "ignore"]
+
+  p
+    = submit "Save", phx_disable_with: "Saving..."
